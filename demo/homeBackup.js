@@ -39,8 +39,6 @@ const Home = ({ authState }) => {
 
 
   const [openMap, setOpenMap] = useState(false)
-
-  //JUST FOR DEMO PURPOSE ONLY
   const [categories, setCategories] = useState(['shortsleeves', 'longsleeves', 'sweatshirt', 'hoodies'])
   const [demoProduct, setDemoProduct] = useState()
 
@@ -111,6 +109,26 @@ const Home = ({ authState }) => {
         </View>
         <Feather name='sliders' size={20} color={"#6A1B4D"} />
       </View>
+      {/* <ScrollView
+        showsVerticalScrollIndicator={false}
+
+        contentContainerStyle={{
+          paddingVertical: 50,
+          paddingBottom: "50%"
+        }}
+      > */}
+
+      {/* <FlatList 
+        
+        data={demoProduct}
+ products,
+    filteredProductNumber,
+    totalcountProduct,
+    resultPerPage,
+
+
+        /> */}
+
       <FlatList
         style={{
           marginVertical: 50,
@@ -127,12 +145,11 @@ const Home = ({ authState }) => {
 
             <View className="flex-1 justify-between ml-3 flex-row">
               <Text className="font-bold  text-lg text-[#6A1B4D] ">{item}</Text>
-              <TouchableOpacity onPress={{}} >
+              <TouchableOpacity onPress={() => navigation.navigate("")} >
                 <Text className="font-bold mr-4 mt-3  text-[#6A1B4D] ">view all</Text>
               </TouchableOpacity>
             </View>
             <View className=" py-5 mt-3  justify-around flex-row space-x-5 ">
-
 
               <FlatList
 
@@ -141,9 +158,14 @@ const Home = ({ authState }) => {
                   margin: 3
                 }
                 }
+
                 horizontal
-                data={getProduct(item,2).then(response => (response.products))
-                }
+
+                data={() => {
+                  const { products, totalcountProduct, filteredProductNumber, resultPerPage } = getProduct(item)
+                  console.log(products)
+                  return products
+                }}
 
                 keyExtractor={(item) => item._id}
                 renderItem={({ item }) => (<ProductCard product={item} />)}

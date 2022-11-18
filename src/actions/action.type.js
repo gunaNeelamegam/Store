@@ -1,1 +1,3 @@
-export cons
+export const SET_USER = "SET_USER"
+export const IS_AUTHENTICATED = "IS_AUTHENTICATED"
+export const SET_TOKEN = "SET_TOKEN"

@@ -4,8 +4,9 @@ import Cart from "../screens/Bottom/Cart"
 import Payment from "../screens/Bottom/Payment"
 import React from 'react'
 import Home from "../screens/Home"
-
+import { useNavigation } from "@react-navigation/native"
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import AdminDashboard from "../screens/AdminDashboard"
 
 
 
@@ -13,6 +14,11 @@ const TabNav = createBottomTabNavigator()
 
 
 const TabNavigation = () => {
+
+
+   
+
+
     return (
         <TabNav.Navigator
             screenOptions={
@@ -24,10 +30,10 @@ const TabNavigation = () => {
                     tabBarInactiveTintColor: "#000",
                 }
             }
-            initialRouteName="Home"
+            initialRouteName="Home1"
         >
             <TabNav.Screen
-                name="Home"
+                name="Home1"
                 component={Home}
                 options={{
                     tabBarIcon: ({ color, focused, size }) => (<Ionicons name="ios-home-outline" size={size} color={color} />)
@@ -51,6 +57,7 @@ const TabNavigation = () => {
                     tabBarIcon: ({ color, focused, size }) => (<MaterialIcons name="payment" size={size} color={color} />)
                 }}
             />
+              
 
         </TabNav.Navigator>
     )

@@ -1,11 +1,15 @@
 import Onboarding from "react-native-onboarding-swiper";
-import { View, Text, Image, Dimensions, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, SafeAreaView } from 'react-native'
 import React from 'react'
 import Lottie from "lottie-react-native"
 import { FontAwesome5, FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons"
 const OnBoarding = ({ navigation }) => {
 
+
+
     const Skip = () => (
+
+
 
         <View style={{ padding: 20 }}  >
             <TouchableOpacity style={{ height: 45, width: 45 }} onPress={() => navigation.navigate("SignIn")} >
@@ -44,104 +48,112 @@ const OnBoarding = ({ navigation }) => {
 
 
     return (
-        <Onboarding
+        <SafeAreaView className=" flex-1 bg-white">
+
+            <Onboarding
+
+                bottomBarColor="grey"
+
+
+                bottomBarHighlight={false}
+
+
+                NextButtonComponent={Next}
+
+                SkipButtonComponent={Skip}
+
+                DoneButtonComponent={Done}
 
 
 
+                pages={
 
-            onDone={() => navigation.push("SignIn")}
-            onSkip={() => navigation.push("SignIn")}
-
-
-
-            bottomBarHighlight={false}
-
-
-            NextButtonComponent={Next}
-
-            SkipButtonComponent={Skip}
-
-            DoneButtonComponent={Done}
-
-
-
-            pages={
-                [{
-                    titleStyles: {
-                        fontFamily: "nova",
-                        fontSize: 25,
-                        fontWeight: "600",
-                        color: "#FFF"
+                    [{
+                        backgroundColor: "#FFF",
+                        titleStyles: {
+                            fontFamily: "nova",
+                            fontSize: 25,
+                            fontWeight: "600",
+                            color: "#000"
+                        },
+                        subTitleStyles: {
+                            fontFamily: "nova",
+                            fontSize: 15,
+                            fontWeight: "600",
+                            color: "#000"
+                        },
+                        image: <Lottie
+                            source={
+                                require("../assets/json/38608-fashionable-girl-in-red-dress.json")
+                            }
+                            style={{
+                                width: 400,
+                                height: 400,
+                            }}
+                            autoPlay
+                            loop
+                        />,
+                        title: "Fashion House",
+                        subtitle: "wordering women 's",
+                    }, {
+                        backgroundColor: "#FFF",
+                        titleStyles: {
+                            fontFamily: "nova",
+                            fontSize: 25,
+                            fontWeight: "600",
+                            color: "#000",
+                            padding: 10
+                        },
+                        subTitleStyles: {
+                            fontFamily: "nova",
+                            fontSize: 15,
+                            fontWeight: "600",
+                            color: "#000"
+                        },
+                        image: <Lottie source={
+                            require("../assets/json/onlinePayment.json")
+                        }
+                            style={{
+                                width: 400,
+                                height: 400,
+                            }}
+                            autoPlay
+                            loop
+                        />,
+                        title: "Ecom store",
+                        subtitle: "wordering women 's",
                     },
-                    subTitleStyles: {
-                        fontFamily: "nova",
-                        fontSize: 25,
-                        fontWeight: "600",
-                        color: "#FFF"
+                    {
+                        backgroundColor: "#FFF",
+                        titleStyles: {
+                            fontFamily: "nova",
+                            fontSize: 25,
+                            fontWeight: "600",
+                            color: "#000"
+                        },
+                        subTitleStyles: {
+                            fontFamily: "nova",
+                            fontSize: 15,
+                            fontWeight: "600",
+                            color: "#000"
+                        },
+                        image: <Lottie source={
+                            require("../assets/json/delivery.json")
+                        }
+                            style={{
+                                width: 400,
+                                height: 400,
+                            }}
+                            autoPlay
+                            loop
+                        />,
+                        title: 'Ecom Store',
+                        subtitle: "build by Guna",
                     },
-                    backgroundColor: '#242B2E',
-                    image: <Lottie source={
-                        require("../assets/json/38608-fashionable-girl-in-red-dress.json")
-                    }
-                        style={{
-                            width: 400,
-                            height: 400,
-                        }}
-                        autoPlay
-                        loop
-                    />,
-                    title: "Fashion House",
-                    subtitle: "wordering women 's",
-                }, {
-                    titleStyles: {
-                        fontFamily: "nova",
-                        fontSize: 25,
-                        fontWeight: "600",
-                        color: "#FFF",
-                        padding: 10
-                    },
-                    subTitleStyles: {},
-                    backgroundColor: '#242B2E',
-                    image: <Lottie source={
-                        require("../assets/json/onlinePayment.json")
-                    }
-                        style={{
-                            width: 400,
-                            height: 400,
-                        }}
-                        autoPlay
-                        loop
-                    />,
-                    title: "Ecom store",
-                    subtitle: "wordering women 's",
-                },
-                {
-                    titleStyles: {
-                        fontFamily: "nova",
-                        fontSize: 25,
-                        fontWeight: "600",
-                        color: "#FFF"
-                    },
-                    subTitleStyles: {},
-                    backgroundColor: '#242B2E',
-                    image: <Lottie source={
-                        require("../assets/json/delivery.json")
-                    }
-                        style={{
-                            width: 400,
-                            height: 400,
-                        }}
-                        autoPlay
-                        loop
-                    />,
-                    title: 'Ecom Store',
-                    subtitle: "build by Guna",
-                },
 
-                ]}
-
-
-        />
+                    ]}
+            />
+        </SafeAreaView>
 
     )
 }
@@ -150,11 +162,3 @@ export default OnBoarding
 
 
 
-
-
-// <Lottie
-//                         style={{
-//                           flex:1,
-//                           alignSelf: "stretch"
-//                         }}
-//                         source={require("../assets/json/delivery.json")} autoPlay loop />

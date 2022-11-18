@@ -1,1 +1,1 @@
-export const BACK_END_API = `http://92.168.174.121/api/v1`
+export const BACK_END_API = `https://guna-store.herokuapp.com/api/v1`

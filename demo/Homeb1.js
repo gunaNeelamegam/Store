@@ -39,8 +39,6 @@ const Home = ({ authState }) => {
 
 
   const [openMap, setOpenMap] = useState(false)
-
-  //JUST FOR DEMO PURPOSE ONLY
   const [categories, setCategories] = useState(['shortsleeves', 'longsleeves', 'sweatshirt', 'hoodies'])
   const [demoProduct, setDemoProduct] = useState()
 
@@ -57,7 +55,7 @@ const Home = ({ authState }) => {
 
   const getProduct = async (productName) => {
     const response = await getAllProducts(authState.token, productName)
-    console.log(response)
+    // console.log(response)
     return response
   }
 
@@ -111,68 +109,66 @@ const Home = ({ authState }) => {
         </View>
         <Feather name='sliders' size={20} color={"#6A1B4D"} />
       </View>
-      <FlatList
-        style={{
-          marginVertical: 50,
-          marginHorizontal: 10
-        }}
+      <ScrollView
         showsVerticalScrollIndicator={false}
 
+        contentContainerStyle={{
+          paddingVertical: 50,
+          paddingBottom: "50%"
+        }}
+      >
 
-        data={categories}
+        {/* <FlatList 
+        
+        data={demoProduct}
+ products,
+    filteredProductNumber,
+    totalcountProduct,
+    resultPerPage,
 
-        keyExtractor={(item) => (item)}
-        renderItem={({ item }) => (
-          <View >
 
-            <View className="flex-1 justify-between ml-3 flex-row">
-              <Text className="font-bold  text-lg text-[#6A1B4D] ">{item}</Text>
-              <TouchableOpacity onPress={{}} >
-                <Text className="font-bold mr-4 mt-3  text-[#6A1B4D] ">view all</Text>
-              </TouchableOpacity>
+        /> */}
+
+        {categories.map((category, index) => {
+
+          const { products, filteredProductNumber, totalProduct } = getProduct()
+
+
+          return (
+            <View key={index}>
+
+              <View className="flex-1 justify-between ml-3 flex-row">
+                <Text className="font-bold  text-lg text-[#6A1B4D] ">{category}</Text>
+                <TouchableOpacity onPress={() => navigation.navigate("")} >
+                  <Text className="font-bold mr-4 mt-3  text-[#6A1B4D] ">view all</Text>
+                </TouchableOpacity>
+              </View>
+              <View className=" py-5 mt-3  justify-around flex-row space-x-5 ">
+
+
+                <FlatList
+
+                  data={() => {
+                    const { products, totalcountProduct, filteredProductNumber, resultPerPage } = getProduct(category)
+                    console.log(products)
+                    return products
+                  }}
+
+                  keyExtractor={(item) => item._id}
+                  renderItem={({ item }) => (<ProductCard product={item} />)}
+                // ListEmptyComponent={() => (
+                //   <ActivityIndicator
+                //     color={`rgb(${Math.ceil(Math.random() * 255)},${Math.ceil(Math.random() * 255)},${Math.ceil(Math.random() * 255)})`} size={40}
+                //   />
+                // )}
+                />
+              </View>
+
             </View>
-            <View className=" py-5 mt-3  justify-around flex-row space-x-5 ">
+          )
 
-
-              <FlatList
-
-                style={{
-                  paddingVertical: 10,
-                  margin: 3
-                }
-                }
-                horizontal
-                data={getProduct(item,2).then(response => (response.products))
-                }
-
-                keyExtractor={(item) => item._id}
-                renderItem={({ item }) => (<ProductCard product={item} />)}
-              // ListEmptyComponent={() => (
-              //   <ActivityIndicator
-              //     color={`rgb(${Math.ceil(Math.random() * 255)},${Math.ceil(Math.random() * 255)},${Math.ceil(Math.random() * 255)})`} size={40}
-              //   />
-              // )}
-              />
-            </View>
-
-          </View>
-
-        )}
-
-      />
-
-
-
-      {/* {categories.map((category, index) => {
-
-        const { products, filteredProductNumber, totalProduct } = getProduct()
-
-        return (
-         
-        )
-
-      })} */}
-      {/* </ScrollView> */}
+        })}
+      </ScrollView>
 
 
 
