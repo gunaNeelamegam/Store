@@ -8,6 +8,7 @@ import { connect } from "react-redux"
 import propTypes from "prop-types"
 import { getAllProducts, getAllCategory } from "../helper/ProductHelper"
 import ProductCard from '../components/ProductCard';
+import ImageS from '../custom/Image';
 
 /*
 RESULT :
@@ -78,6 +79,7 @@ const Home = ({ authState }) => {
 
   return (
     <SafeAreaView className="bg-white pt-2" >
+      <ImageS />
       <View className="flex-row pb-3 items-center mx-3 space-x-2 " >
         <Image source={
           require("../assets/images/logo.png")
@@ -142,7 +144,7 @@ const Home = ({ authState }) => {
                 }
                 }
                 horizontal
-                data={getProduct(item,2).then(response => (response.products))
+                data={getProduct(item, 2).then(response => (response.products))
                 }
 
                 keyExtractor={(item) => item._id}

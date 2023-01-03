@@ -5,23 +5,26 @@ import { useNavigation } from '@react-navigation/native'
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import { getSingleProduct } from '../helper/ProductHelper';
 import { connect } from "react-redux"
-import propTypes from "prop-types"
+import propTypes, { number } from "prop-types"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const SingleProduct = ({ route }) => {
 
+
+
   const naviagtion = useNavigation()
   const [id, setId] = useState()
   const [product, setProduct] = useState()
+  const [rating, setRating] = useState()
 
   // const { userId } = route?.params
   // setId(userId)
   const getProduct = async () => {
-    // const product = await getSingleProduct(authState.token, id)
-    // setProduct(product)
     const token = await AsyncStorage.getItem("token")
-    console.log( token)
+    const product = await getSingleProduct(token, id)
+    console.log(product)
+    setProduct(product)
   }
 
   useEffect(() => {
@@ -33,7 +36,7 @@ const SingleProduct = ({ route }) => {
     <SafeAreaView className="bg-gray-200 flex-1 space-x-2 space-y-2 p-5 ">
       <View>
         <Text className="m-auto  p-2 font-mono text-lg " >{`Product name`}</Text>
-        <TouchableOpacity onPress={() => { naviagtion.canGoBack() }}>
+        <TouchableOpacity onPress={() => { naviagtion.goBack() }}>
           <View className=" space-x-2 justify-between p-3 flex-row ">
             <Ionicons name="chevron-back-circle-outline" size={30} color="#6A2b4D" />
           </View>
@@ -54,26 +57,57 @@ const SingleProduct = ({ route }) => {
         </ScrollView>
       </View>
       <View className="flex-1    rounded-2xl bg-gray-100">
-        <View className="flex-row  space-x-2">
+        <View className="flex-row mr-10 p-5 justify-between space-x-2">
           <AirbnbRating
-            count={5}
+            count={rating}
             defaultRating={0}
             size={20}
-
+            showRating={false}
+          // onFinishRating={(number) => console.log(number)}
           />
-          <Text >
+          <Text className="font-bold  text-lg text-[#6a2b4d]" >
             {product?.price}  {'\u20B9'}
           </Text>
         </View>
+
+        <View
+        className="text"
+        >
+
+
+          <View className="flex-row mr-10 p-5 justify-between space-x-2 bottom-2">
+
+            <TouchableOpacity
+              className="border border-gray-200 p-3"
+            >
+              <Text
+                className="font-bold"
+              >
+                Add Cart
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              className="border border-gray-200 p-3"
+            >
+              <Text
+                className="font-bold"
+
+              >
+                Buy
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
+
     </SafeAreaView>
 
   )
 }
 
-SingleProduct.propTypes = {
-  authState: propTypes.object.isRequired,
-}
+// SingleProduct.propTypes = {
+//   authState: propTypes.object.isRequired,
+// }
 
 const mapStateToProps = (state) => ({
   authState: state.authState
